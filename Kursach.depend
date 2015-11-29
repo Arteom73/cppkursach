@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1448831081 source:d:\Учеба\ckursach\kursach\main.cpp
+	<iostream>
+	<fstream>
+	<stdio.h>
+	<locale>
+	<vector>
+	<string>
+	<sstream>
+	<cstdlib>
+
