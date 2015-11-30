@@ -12,22 +12,22 @@
 
 using namespace std;
 
-vector<string> split(string str, char delimiter) {
-	vector<string> internal;
-	stringstream ss(str); // Turn the string into a stream.
-	string tok;
-
-	while (getline(ss, tok, delimiter)) {
-		internal.push_back(tok);
-	}
-
-	return internal;
-}
+class Work {
+    public:
+        void showClients() {
+        }
+        void addClients() {
+        }
+        void editClients() {
+        }
+        void deleteClients() {
+        }
+};
 
 struct clients {
 	int id;
-	char name;
-	char phone;
+	string name;
+	string phone;
 };
 struct services {
 	int id;
@@ -49,6 +49,7 @@ struct spending {
 	char date;
 };
 
+
 int main(void)
 {
 	setlocale(LC_ALL, "RUSSIAN");
@@ -57,7 +58,7 @@ int main(void)
 	int act;
 	int act2;
 	std::ifstream usersFile("clients.txt");
-	std::vector<std::string> users;
+    std::vector<clients> cli;
 
 	while (true) {
 		printf("1 - пользователи\n");
@@ -89,13 +90,32 @@ int main(void)
 								cout << "Не открыт\n";
 							} else {
 								std::string line;
+								std::string line2;
 								int count = 0;
 								while (std::getline(usersFile, line)) {
-									users.push_back(line);
+									//users.push_back(line);
+									stringstream ss(line);
+                                    int i = 0;
+									cli.push_back(clients());
+									while (std::getline(ss, line2, ';')) {
+                                        //cout << line2 << '\n';
+                                        if(i == 0) {
+                                            cli[count].id = atoi(line2.c_str());
+                                        }
+                                        if(i == 1)
+                                            cli[count].name = line2;
+                                        if(i == 2)
+                                            cli[count].phone = line2;
+                                        i++;
+									}
 									count++;
 								}
+
 								for (int i = 0; i < count; i++) {
-									cout << users[i] << '\n';
+                                    cout << "Номер: " << cli[i].id << '\n';
+                                    cout << "Имя: " << cli[i].name << '\n';
+                                    cout << "Телефон: " << cli[i].phone << '\n';
+                                    cout << '\n';
 								}
 							}
 
@@ -118,15 +138,4 @@ int main(void)
 		printf("\n\n");
 	}
 	usersFile.close();
-	/*int array[n] = { 4,44,446,4466 };
-
-	errno_t err;
-
-	// Open for read (will fail if file "crt_fopen_s.c" does not exist)
-	err = fopen_s(&stream, "d:\\aaa.txt", "r");
-	for (int i = 0; i<n; i++)
-		fprintf(stream, "%6.2d", array[i]);
-	fclose(stream);*/
-
-
 }
