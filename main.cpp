@@ -12,6 +12,35 @@
 
 using namespace std;
 
+struct clients {
+	int id;
+	string name;
+	string phone;
+	clients *Next;
+};
+struct services {
+	int id;
+	char name;
+	float price;
+	services *Next;
+};
+struct payment {
+	int id;
+	int id_client;
+	int id_service;
+	float sum;
+	int date;
+	payment *Next;
+};
+struct spending {
+	int id;
+	int id_client;
+	int id_service;
+	float count;
+	int date;
+	spending *Next;
+};
+
 class Work {
     public:
         void showClients() {
@@ -22,31 +51,6 @@ class Work {
         }
         void deleteClients() {
         }
-};
-
-struct clients {
-	int id;
-	string name;
-	string phone;
-};
-struct services {
-	int id;
-	char name;
-	float price;
-};
-struct payment {
-	int id;
-	int id_client;
-	int id_service;
-	float sum;
-	char date;
-};
-struct spending {
-	int id;
-	int id_client;
-	int id_service;
-	float count;
-	char date;
 };
 
 
@@ -93,21 +97,17 @@ int main(void)
 								std::string line2;
 								int count = 0;
 								while (std::getline(usersFile, line)) {
-									//users.push_back(line);
 									stringstream ss(line);
-                                    int i = 0;
 									cli.push_back(clients());
-									while (std::getline(ss, line2, ';')) {
-                                        //cout << line2 << '\n';
-                                        if(i == 0) {
-                                            cli[count].id = atoi(line2.c_str());
-                                        }
-                                        if(i == 1)
-                                            cli[count].name = line2;
-                                        if(i == 2)
-                                            cli[count].phone = line2;
-                                        i++;
-									}
+                                    string id;
+                                    string name;
+                                    string phone;
+                                    getline(ss, id, ';');
+                                    getline(ss, name, ';');
+                                    getline(ss, phone, ';');
+                                    cli[count].id = atoi(id.c_str());
+                                    cli[count].name = name;
+                                    cli[count].phone = phone;
 									count++;
 								}
 
